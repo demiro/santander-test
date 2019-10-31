@@ -1,12 +1,26 @@
 <table>
   <tr *ngFor="let person of data">
     <td>
-      {{person.name}}
+      <div
+        class="info"
+        *ngIf="!person.editing"
+      >
+        {{person.name}}
+      </div>
       <app-person-form
+        *ngIf="person.editing"
         (submitted)="savePerson($event)"
         btnText="Save"
       ></app-person-form>
     </td>
-    <td><button (click)="edit">edit</button> <button>delete</button></td>
+    <td>
+      <div
+        class="row-toolbar"
+        *ngIf="!person.editing"
+      >
+        <button (click)="person.editing = true">edit</button>
+        <button>delete</button>
+      </div>
+    </td>
   </tr>
 </table>
