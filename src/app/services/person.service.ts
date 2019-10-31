@@ -25,4 +25,8 @@ export class PersonService {
   }
 
   add(person: Person) {}
+
+  deleteAll() {
+    this.people$.next({});
+  }
 }

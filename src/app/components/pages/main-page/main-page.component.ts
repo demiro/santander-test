@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class MainPageComponent implements OnInit {
   peopleSubscription: Subscription;
   data: Person[] = [];
+  showDeleteAllPrompt: boolean = false;
 
   constructor(private personService: PersonService) {
     this.peopleSubscription = this.personService.people$.subscribe(people => {
@@ -24,5 +25,14 @@ export class MainPageComponent implements OnInit {
 
   saveNew(person: Person) {
     this.personService.add(person);
+  }
+
+  deleteAll() {
+    this.personService.deleteAll();
+    this.showDeleteAllPrompt = false;
+  }
+
+  editAll() {
+    // do something
   }
 }

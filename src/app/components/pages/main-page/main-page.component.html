@@ -1,9 +1,23 @@
-<app-user-form
+<app-person-form
   (submitted)="saveNew($event)"
   btnText="Save"
-></app-user-form>
+></app-person-form>
 
+<div
+  class="delete-all-prompt"
+  *ngIf="showDeleteAllPrompt"
+>
+  <b>Are you sure you want to delete all people?</b> &nbsp;
+  <button (click)="deleteAll()">Delete</button> &nbsp;
+  <button (click)="showDeleteAllPrompt = false">Cancel</button>
+</div>
 
-<app-user-table [data]="data">
+<div
+  class="toolbar"
+  *ngIf="!showDeleteAllPrompt"
+>
+  <button (click)="editAll()">Edit All</button>
+  <button (click)="showDeleteAllPrompt=true">Delete All</button>
+</div>
 
-</app-user-table>
+<app-person-table [data]="data"></app-person-table>

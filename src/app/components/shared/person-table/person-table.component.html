@@ -1,0 +1,12 @@
+<table>
+  <tr *ngFor="let person of data">
+    <td>
+      {{person.name}}
+      <app-person-form
+        (submitted)="savePerson($event)"
+        btnText="Save"
+      ></app-person-form>
+    </td>
+    <td><button (click)="edit">edit</button> <button>delete</button></td>
+  </tr>
+</table>

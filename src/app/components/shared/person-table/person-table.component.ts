@@ -2,11 +2,11 @@ import { Person } from 'src/app/models/person';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-user-table',
-  templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.scss']
+  selector: 'app-person-table',
+  templateUrl: './person-table.component.html',
+  styleUrls: ['./person-table.component.scss']
 })
-export class UserTableComponent implements OnInit {
+export class PersonTableComponent implements OnInit {
   @Input() data: Person[] = [];
 
   constructor() {}
