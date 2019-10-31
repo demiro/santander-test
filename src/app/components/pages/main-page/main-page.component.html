@@ -1,1 +1,9 @@
-<p>main-page works!</p>
+<app-user-form
+  (submitted)="saveNew($event)"
+  btnText="Save"
+></app-user-form>
+
+
+<app-user-table [data]="data">
+
+</app-user-table>

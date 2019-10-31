@@ -1,1 +1,6 @@
-<p>user-table works!</p>
+<table>
+  <tr *ngFor="let person of data">
+    <td>{{person.name}}</td>
+    <td><button>edit</button> <button>delete</button></td>
+  </tr>
+</table>
