@@ -23,10 +23,10 @@
     ><input
         type="checkbox"
         [checked]="person.checked"
-        (change)="toggleCheckboxOne(person.id)"
+        (click)="toggleCheckboxOne(person.id); $event.stopPropagation();"
       ></td>
 
-    <td>
+    <td [attr.colspan]="person.editing ? 2 : 1">
       <div
         class="info"
         *ngIf="!person.editing"
@@ -35,18 +35,29 @@
       </div>
       <app-person-form
         *ngIf="person.editing"
-        (submitted)="savePerson($event)"
+        [data]="person"
+        (submitted)="updatePerson($event); person.editing = false;"
+        (cancelled)="person.editing = false"
         btnText="Save"
       ></app-person-form>
     </td>
 
-    <td class="toolbar">
+    <td
+      class="toolbar"
+      *ngIf="!person.editing"
+    >
       <div
         class="row-toolbar"
         *ngIf="!person.editing"
       >
-        <button (click)="person.editing = true">edit</button>
-        <button (click)="deletePerson(person.id)">delete</button>
+        <button
+          (click)="$event.stopPropagation(); person.editing = true;"
+          class="button button-small"
+        >edit</button>
+        <button
+          (click)="$event.stopPropagation(); deletePerson(person.id)"
+          class="button button-small button-warning"
+        >delete</button>
       </div>
     </td>
   </tr>

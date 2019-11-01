@@ -1,5 +1,5 @@
 <form
-  (submit)="onSubmitted($event)"
+  (submit)="(!!data && data.id)? onUpdated($event) : onSubmitted($event)"
   [formGroup]="personForm"
   class="person-form"
 >
@@ -19,9 +19,16 @@
 
   <button
     type="submit"
-    [disabled]="personForm.invalid"
-    class="submit-button"
+    [disabled]="personForm.invalid || !personForm.dirty"
+    class="submit-button button"
   >
-    {{btnText}}
+    {{!data || !data?.id ? 'Save' : 'Update'}}
   </button>
+
+  <a
+    *ngIf="data?.id"
+    href="#"
+    (click)="onCancelled($event); $event.stopPropagation(); "
+    class="button"
+  >cancel</a>
 </form>

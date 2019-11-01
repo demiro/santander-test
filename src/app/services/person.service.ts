@@ -41,6 +41,16 @@ export class PersonService {
     this.emitNewState();
   }
 
+  deleteSelected() {
+    Object.keys(this.currentPeopleState).forEach(id => {
+      if (this.currentPeopleState[id].checked) {
+        delete this.currentPeopleState[id];
+      }
+    });
+
+    this.emitNewState();
+  }
+
   deletePerson(id) {
     if (!!this.currentPeopleState[id]) {
       delete this.currentPeopleState[id];
@@ -48,9 +58,15 @@ export class PersonService {
     this.emitNewState();
   }
 
+  updatePerson(id: number, name: string) {
+    if (!!this.currentPeopleState[id] && !!name) {
+      this.currentPeopleState[id].name = name;
+    }
+    this.emitNewState();
+  }
+
   toggleAll(checked: boolean) {
     Object.keys(this.currentPeopleState).forEach(id => {
-      console.log('PERSON', this.currentPeopleState[id]);
       this.currentPeopleState[id].checked = checked;
     });
     this.emitNewState();
@@ -66,12 +82,29 @@ export class PersonService {
     this.emitNewState();
   }
 
+  markSelectedForEditing() {
+    Object.keys(this.currentPeopleState).forEach(id => {
+      if (this.currentPeopleState[id].checked) {
+        this.currentPeopleState[id].editing = true;
+      }
+    });
+
+    this.emitNewState();
+  }
+
+  markAllForEditing() {
+    Object.keys(this.currentPeopleState).forEach(id => {
+      this.currentPeopleState[id].editing = true;
+    });
+
+    this.emitNewState();
+  }
+
   private getCurrentState() {
     return clonedeep(this.currentPeopleState);
   }
 
   private emitNewState() {
-    console.log('NEW STATE', this.currentPeopleState);
     this.people$.next(this.currentPeopleState);
   }
 }

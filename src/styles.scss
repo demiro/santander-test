@@ -41,3 +41,38 @@ body {
   background-color: #eee;
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+button.button {
+  border: 1px solid #aaa;
+  background: #ddd;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    background: #ccc;
+  }
+
+  &.button-small {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+
+  &.button-warning {
+    background: rgba(maroon, 0.1);
+
+    &:hover {
+      background: rgba(maroon, 0.2);
+    }
+  }
+}
+
+a.button {
+  padding: 5px 10px;
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

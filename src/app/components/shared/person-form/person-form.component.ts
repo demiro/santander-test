@@ -11,6 +11,7 @@ export class PersonFormComponent implements OnInit, OnChanges {
   @Input() btnText: string = 'Add';
   @Input() data: Person;
   @Output() submitted: EventEmitter<Person> = new EventEmitter<Person>();
+  @Output() cancelled: EventEmitter<Person> = new EventEmitter<Person>();
   personForm: FormGroup;
 
   constructor() {
@@ -30,10 +31,22 @@ export class PersonFormComponent implements OnInit, OnChanges {
   onSubmitted(event: Event) {
     event.preventDefault();
     // check the validation
-    console.log('IS VALID', this.personForm.valid);
     if (this.personForm.valid) {
-      this.submitted.next({ name: 'blah' });
+      this.submitted.next({ name: this.personForm.controls.firstName.value });
+      this.onResetName();
     }
+  }
+
+  onUpdated(event: Event) {
+    event.preventDefault();
+    if (this.personForm.valid) {
+      this.submitted.next({ id: this.data.id, name: this.personForm.controls.firstName.value });
+    }
+  }
+
+  onCancelled(event: MouseEvent) {
+    event.preventDefault();
+    this.cancelled.next();
   }
 
   onResetName() {

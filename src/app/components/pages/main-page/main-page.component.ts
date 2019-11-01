@@ -12,11 +12,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
   peopleSubscription: Subscription;
   data: Person[] = [];
   showDeleteAllPrompt: boolean = false;
+  totalSelected: number = 0;
 
   constructor(private personService: PersonService) {
     this.peopleSubscription = this.personService.people$.subscribe(people => {
       this.data = [];
+
+      this.totalSelected = 0;
+
       Object.keys(people).forEach(id => {
+        if (people[id].checked === true) {
+          this.totalSelected++;
+        }
         this.data.push(people[id]);
       });
     });
@@ -33,8 +40,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.showDeleteAllPrompt = false;
   }
 
+  deleteSelected() {
+    this.personService.deleteSelected();
+    this.showDeleteAllPrompt = false;
+  }
+
   editAll() {
     // do something
+    if (this.totalSelected > 0) {
+      this.personService.markSelectedForEditing();
+    } else {
+      this.personService.markAllForEditing();
+    }
   }
 
   ngOnDestroy() {

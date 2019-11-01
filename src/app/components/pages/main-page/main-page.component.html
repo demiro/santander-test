@@ -1,23 +1,51 @@
-<app-person-form
-  (submitted)="saveNew($event)"
-  btnText="Save"
-></app-person-form>
+<div class="form-container">
+  <app-person-form
+    (submitted)="saveNew($event)"
+    btnText="Save"
+  ></app-person-form>
+</div>
 
 <div
   class="delete-all-prompt"
   *ngIf="showDeleteAllPrompt"
 >
-  <b>Are you sure you want to delete all people?</b> &nbsp;
-  <button (click)="deleteAll()">Delete</button> &nbsp;
-  <button (click)="showDeleteAllPrompt = false">Cancel</button>
+  <b>
+    Are you sure you want to delete
+    <span *ngIf="totalSelected>0">{{totalSelected}} selected</span>
+    <span *ngIf="totalSelected===0">all</span>
+    people?
+  </b> &nbsp;
+  <button
+    (click)="totalSelected>0 ? deleteSelected() : deleteAll()"
+    class="button delete-button"
+  >Delete</button> &nbsp;
+  <a
+    href=""
+    (click)="showDeleteAllPrompt = false"
+    class="button"
+  >Cancel</a>
 </div>
 
 <div
   class="toolbar"
   *ngIf="!showDeleteAllPrompt"
 >
-  <button (click)="editAll()">Edit All</button>
-  <button (click)="showDeleteAllPrompt=true">Delete All</button>
+  <button
+    (click)="editAll()"
+    class="button"
+  >
+    Edit
+    <span *ngIf="totalSelected>0">{{totalSelected}} selected</span>
+    <span *ngIf="totalSelected===0">All</span>
+  </button> &nbsp;
+  <button
+    (click)="showDeleteAllPrompt=true"
+    class="button button-warning"
+  >
+    Delete
+    <span *ngIf="totalSelected>0">{{totalSelected}} selected</span>
+    <span *ngIf="totalSelected===0">All</span>
+  </button>
 </div>
 
 <app-person-table [data]="data"></app-person-table>

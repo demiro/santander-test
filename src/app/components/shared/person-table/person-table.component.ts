@@ -16,23 +16,25 @@ export class PersonTableComponent implements OnInit, OnDestroy {
 
   isSelectedAll: boolean = false;
   peopleSubscription: Subscription;
+  totalSelected: 0;
 
   constructor(private personService: PersonService) {
     // Definitely not the way to go in sub-component, but for the simplicity sake
     this.peopleSubscription = this.personService.people$.subscribe(people => {
-      let checked: number = 0;
+      this.totalSelected = 0;
+      this.isSelectedAll = false;
       Object.keys(people).forEach(id => {
-        if (people[id].checked) {
-          checked++;
+        if (people[id].checked === true) {
+          this.totalSelected++;
         }
       });
+      const total = Object.keys(people).length;
 
-      if (checked === people.length) {
+      if (this.totalSelected === total) {
         this.isSelectedAll = true;
-      } else if (checked === 0) {
-        this.isSelectedAll = false;
-      } else {
-        this.isSelectedAll = false;
+      }
+
+      if (this.totalSelected > 0 && this.totalSelected !== total) {
         this.checkAllEl.nativeElement.indeterminate = true;
       }
     });
@@ -48,12 +50,15 @@ export class PersonTableComponent implements OnInit, OnDestroy {
   toggleCheckboxOne(id: number) {
     // again, this should be delegated to parent (main page component), but for simplicity
     this.personService.togglePerson(id);
-    return false;
   }
 
   deletePerson(id: number) {
     // read previous comments
     this.personService.deletePerson(id);
+  }
+
+  updatePerson(person: Person) {
+    this.personService.updatePerson(person.id, person.name);
   }
 
   ngOnDestroy() {

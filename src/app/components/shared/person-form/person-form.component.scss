@@ -1,15 +1,14 @@
 .person-form {
-  margin: 20px 0;
-  padding: 20px;
-  background: #ddd;
+
 
   .first-name-field {
     padding: 4px 8px;
     width: 300px;
+    margin-right: 6px;
   }
 
   .submit-button {
-    padding: 4px 8px;
+    padding: 6px 12px;
     font-weight: bold;
   }
 }
