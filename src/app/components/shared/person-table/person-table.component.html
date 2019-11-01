@@ -1,5 +1,31 @@
-<table>
-  <tr *ngFor="let person of data">
+<table class="people-table">
+
+  <tr class="title">
+    <th class="check"><input
+        (change)="toggleCheckboxAll()"
+        [(ngModel)]="isSelectedAll"
+        type="checkbox"
+        #checkAll
+      ></th>
+    <th>Name</th>
+    <th class="toolbar">Action</th>
+  </tr>
+
+  <tr
+    *ngFor="let person of data"
+    [class.selected]="person.checked"
+    (click)="toggleCheckboxOne(person.id)"
+  >
+
+    <td
+      class="check"
+      [title]="person.id"
+    ><input
+        type="checkbox"
+        [checked]="person.checked"
+        (change)="toggleCheckboxOne(person.id)"
+      ></td>
+
     <td>
       <div
         class="info"
@@ -13,13 +39,14 @@
         btnText="Save"
       ></app-person-form>
     </td>
-    <td>
+
+    <td class="toolbar">
       <div
         class="row-toolbar"
         *ngIf="!person.editing"
       >
         <button (click)="person.editing = true">edit</button>
-        <button>delete</button>
+        <button (click)="deletePerson(person.id)">delete</button>
       </div>
     </td>
   </tr>

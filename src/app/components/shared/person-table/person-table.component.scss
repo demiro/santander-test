@@ -1,0 +1,42 @@
+.people-table {
+  border: 1px solid #ddd;
+  width: 550px;
+  margin: 20px 0;
+
+  tr.selected td {
+    background: rgba(124, 143, 171, 0.2);
+  }
+
+  tr:hover td {
+    background: rgba(150, 150, 150, 0.2);
+  }
+
+  th {
+    background: rgb(124, 143, 171);
+    color: #fff;
+  }
+
+  td,
+  th {
+    text-align: left;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  td,
+  th {
+    &.check {
+      width: 50px;
+      text-align: center;
+    }
+
+    &.toolbar {
+      width: 150px;
+      text-align: center;
+
+      button {
+        margin: 0 4px;
+      }
+    }
+  }
+}

@@ -1,22 +1,23 @@
-import { PersonService } from 'src/app/services/person.service';
-import { Component, OnInit } from '@angular/core';
-import { Person } from 'src/app/models/person';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Person } from 'src/app/models/person';
+import { PersonService } from 'src/app/services/person.service';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
   peopleSubscription: Subscription;
   data: Person[] = [];
   showDeleteAllPrompt: boolean = false;
 
   constructor(private personService: PersonService) {
     this.peopleSubscription = this.personService.people$.subscribe(people => {
-      this.data = Object.keys(people).map(id => {
-        return { id, name: people[id] };
+      this.data = [];
+      Object.keys(people).forEach(id => {
+        this.data.push(people[id]);
       });
     });
   }
@@ -34,5 +35,11 @@ export class MainPageComponent implements OnInit {
 
   editAll() {
     // do something
+  }
+
+  ngOnDestroy() {
+    if (this.peopleSubscription) {
+      this.peopleSubscription.unsubscribe();
+    }
   }
 }

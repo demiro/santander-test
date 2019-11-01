@@ -1,3 +1,26 @@
-<form (submit)="onSubmitted($event)">
-  <button type="submit">{{btnText}}</button>
+<form
+  (submit)="onSubmitted($event)"
+  [formGroup]="personForm"
+  class="person-form"
+>
+
+  <input
+    type="text"
+    formControlName="firstName"
+    minlength="2"
+    maxlength="50"
+    required
+    placeholder="Enter your name"
+    (keydown.enter)="onSubmitted($event)"
+    (keydown.esc)="onResetName($event)"
+    class="first-name-field"
+  >
+
+  <button
+    type="submit"
+    [disabled]="personForm.invalid"
+    class="submit-button"
+  >
+    {{btnText}}
+  </button>
 </form>
