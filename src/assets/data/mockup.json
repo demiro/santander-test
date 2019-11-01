@@ -1,7 +1,19 @@
-{
-  "1": "John Wayne",
-  "2": "Luke Skywalker",
-  "3": "Mike Mayers",
-  "4": "Freddie Kruger",
-  "5": "Bruce Lee"
-}
+[{
+    "name": "Ras Berry"
+  },
+  {
+    "name": "John Doe"
+  },
+  {
+    "name": "Gareth Aldridge"
+  },
+  {
+    "name": "Hallen Pipper"
+  },
+  {
+    "name": "Joe Allen"
+  },
+  {
+    "name": "Dolly Johnson"
+  }
+]

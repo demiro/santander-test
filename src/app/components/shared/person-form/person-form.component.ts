@@ -33,7 +33,7 @@ export class PersonFormComponent implements OnInit, OnChanges {
     // check the validation
     if (this.personForm.valid) {
       this.submitted.next({ name: this.personForm.controls.firstName.value });
-      this.onResetName();
+      this.personForm.controls.firstName.setValue('');
     }
   }
 
@@ -49,7 +49,7 @@ export class PersonFormComponent implements OnInit, OnChanges {
     this.cancelled.next();
   }
 
-  onResetName() {
+  onResetName(event: KeyboardEvent) {
     this.personForm.controls.firstName.setValue('');
   }
 }

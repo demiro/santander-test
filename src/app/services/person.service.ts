@@ -15,15 +15,15 @@ export class PersonService {
 
   constructor(private http: HttpClient) {
     this.load().subscribe(response => {
-      Object.keys(response).forEach(id => {
-        this.currentPeopleState[id] = { id: parseInt(id, 10), name: response[id] };
+      response.forEach((person, idx) => {
+        this.currentPeopleState[idx] = { id: idx, name: person.name };
       });
       this.emitNewState();
     });
   }
 
   load() {
-    return this.http.get<Person>('/assets/data/mockup.json').pipe(
+    return this.http.get<Person[]>('/assets/data/mockup.json').pipe(
       tap(response => {
         // deal with some data normalization, sanitation, error handling
       })
