@@ -1,3 +1,4 @@
+import { SpecialCharacterDirective } from './directives/special-character.directive';
 import { PersonService } from './services/person.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,7 +19,8 @@ import { MainPageComponent } from './components/pages/main-page/main-page.compon
     AppFooterComponent,
     PersonFormComponent,
     PersonTableComponent,
-    MainPageComponent
+    MainPageComponent,
+    SpecialCharacterDirective
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [PersonService],

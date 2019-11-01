@@ -1,3 +1,4 @@
+declare var require: any;
 import { Person } from 'src/app/models/person';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
